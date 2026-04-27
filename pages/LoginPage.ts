@@ -1,11 +1,14 @@
 import { Page } from "@playwright/test";
+import SearchComponent from "../components/SearchComponent";
 
 class LoginPage {
     private page: Page;
     public url: string = "https://ecommerce-playground.lambdatest.io/index.php?route=account/login";
-
+    readonly searchComponent: SearchComponent;
+    
     constructor(page: Page) {
         this.page = page;
+        this.searchComponent = new SearchComponent(this.page);
     }
 
     async navigateToLoginPage() {

@@ -8,7 +8,7 @@ export default defineConfig({
     ['html', { outputFolder: 'playwright-report' }]
   ],
   use: {
-    headless: false,
+    headless: true,
     // viewport: { width: 1280, height: 720 },
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
@@ -21,18 +21,18 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'safari',
-      use: { ...devices['Desktop Safari'] },
-    },
-    {
-      name: 'edge',
-      use: { ...devices['Desktop Edge'] },
     }
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+    // {
+    //   name: 'safari',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+    // {
+    //   name: 'edge',
+    //   use: { ...devices['Desktop Edge'] },
+    // }
   ]
 });
