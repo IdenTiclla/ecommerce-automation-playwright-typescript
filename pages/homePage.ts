@@ -4,7 +4,7 @@ import SearchComponent from "../components/SearchComponent";
 
 
 class HomePage extends BasePage {
-    public url: string = "https://ecommerce-playground.lambdatest.io/";
+    public url: string = process.env.BASE_URL || "https://ecommerce-playground.lambdatest.io/";
     // private page: Page;
     readonly dummy_message: Locator;
     readonly dummy_message_loc2: Locator;

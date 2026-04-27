@@ -1,4 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
+
+/**
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 export default defineConfig({
   testDir: './tests',
@@ -12,7 +20,7 @@ export default defineConfig({
     // viewport: { width: 1280, height: 720 },
     viewport: { width: 1920, height: 1080 },
     ignoreHTTPSErrors: true,
-    baseURL: 'https://ecommerce-playground.lambdatest.io/',
+    baseURL: process.env.BASE_URL,
     screenshot: 'only-on-failure',
     video: 'on',
     trace: 'on'

@@ -1,7 +1,5 @@
 import { test, expect } from "../../../fixtures/baseTest"
 
-process.loadEnvFile();
-
 
 test("Login with valid credentials", async ({ page, loginPage, homePage}) => {
 
