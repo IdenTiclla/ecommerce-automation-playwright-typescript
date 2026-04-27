@@ -4,123 +4,125 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)](https://github.com/)
 
-Suite de pruebas automatizadas robusta y escalable desarrollada con **Playwright** y **TypeScript** para validar la integridad funcional de una plataforma de e-commerce.
+A robust and scalable automated testing suite developed with **Playwright** and **TypeScript** to validate the functional integrity of an e-commerce platform.
 
 ---
 
-## 🌟 Características Principales
+## 🌟 Key Features
 
-Este proyecto implementa una cobertura completa para flujos críticos de usuario utilizando las mejores prácticas de automatización:
+This project implements comprehensive coverage for critical user flows using automation best practices:
 
-- **Estrategia de Pruebas**:
-  - ✅ **Flujos de Autenticación**: Login robusto con validaciones positivas y negativas.
-  - ✅ **Gestión de Cuentas**: Registro de nuevos usuarios con aserciones detalladas.
-  - ✅ **Exploración de Productos**: Búsqueda avanzada y navegación en la homepage.
-- **Arquitectura de Software**:
-  - 🏗️ **Page Object Model (POM)**: Separación clara entre lógica de negocio y localizadores.
-  - 🔌 **Custom Fixtures**: Abstracciones para simplificar la configuración de cada prueba.
-  - 🛠️ **Utility Helpers**: Funciones auxiliares para manipulación de datos y esperas.
+- **Testing Strategy**:
+  - ✅ **Authentication Flows**: Robust login with positive and negative validation.
+  - ✅ **Account Management**: New user registration with detailed assertions.
+  - ✅ **Product Exploration**: Advanced search and navigation on the homepage.
+  - ✅ **Interactive Components**: Validation of UI elements like sliders and carousels.
+- **Software Architecture**:
+  - 🏗️ **Page Object Model (POM)**: Clear separation between business logic and locators.
+  - 🔌 **Custom Fixtures**: Abstractions to simplify test setup.
+  - 🛠️ **Utility Helpers**: Auxiliary functions for data manipulation and waits.
 
 ---
 
-## 🛠️ Stack Tecnológico
+## 🛠️ Tech Stack
 
-| Herramienta | Propósito |
+| Tool | Purpose |
 | :--- | :--- |
-| **Playwright** | Motor de automatización cross-browser |
-| **TypeScript** | Tipado estático para un código más seguro y mantenible |
-| **Node.js** | Entorno de ejecución de JavaScript |
-| **Dotenv** | Gestión segura de variables de entorno |
+| **Playwright** | Cross-browser automation engine |
+| **TypeScript** | Static typing for safer and more maintainable code |
+| **Node.js** | JavaScript runtime environment |
+| **Dotenv** | Secure environment variable management |
 
 ---
 
-## 🚀 Inicio Rápido
+## 🚀 Quick Start
 
-### 1. Requisitos Previos
-- **Node.js** (v18.0 o superior recomendada)
-- **npm** (v9.0 o superior)
+### 1. Prerequisites
+- **Node.js** (v18.0 or higher recommended)
+- **npm** (v9.0 or higher)
 
-### 2. Instalación
+### 2. Installation
 ```bash
-# Instalar todas las dependencias
+# Install all dependencies
 npm install
 
-# Instalar los navegadores necesarios para Playwright
+# Install required browsers for Playwright
 npx playwright install
 ```
 
-### 3. Configuración de Variables de Entorno
-Crea un archivo `.env` en la raíz del proyecto (o usa el existente) con las siguientes variables para que las pruebas funcionen correctamente:
+### 3. Environment Variables Configuration
+Create a `.env` file in the project root (refer to `.env.example`) with the following variables for the tests to run correctly:
 
 ```env
-VALID_EMAIL=tu_correo@gmail.com
-VALID_PASSWORD=tu_password
-INVALID_EMAIL=correo_invalido@test.com
-INVALID_PASSWORD=password_incorrecta
+VALID_EMAIL=your_email@gmail.com
+VALID_PASSWORD=your_password
+INVALID_EMAIL=invalid_email@test.com
+INVALID_PASSWORD=incorrect_password
 ```
 
 ---
 
-## 📖 Ejecución de Pruebas
+## 📖 Running Tests
 
-El proyecto cuenta con varios scripts configurados en `package.json` para facilitar el testing:
+The project includes several scripts configured in `package.json` for easy testing:
 
-| Comando | Acción |
+| Command | Action |
 | :--- | :--- |
-| `npm test` | Ejecuta todas las pruebas en modo *headless* |
-| `npm run test:ui` | Abre la interfaz gráfica de Playwright (interactivo) |
-| `npm run test:headed` | Ejecuta las pruebas mostrando el navegador |
-| `npm run test:debug` | Inicia el depurador de Playwright |
-| `npm run test:chrome` | Ejecuta pruebas específicamente en Chromium |
-| `npm run test:report` | Muestra el último reporte HTML generado |
+| `npm test` | Runs all tests in *headless* mode |
+| `npm run test:ui` | Opens the Playwright UI (interactive) |
+| `npm run test:headed` | Runs tests showing the browser |
+| `npm run test:debug` | Starts the Playwright debugger |
+| `npm run test:chrome` | Runs tests specifically in Chromium |
+| `npm run test:report` | Shows the last generated HTML report |
 
 ---
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```bash
 .
-├── components/          # Componentes compartidos entre páginas
+├── components/          # Shared components across pages
+│   ├── MainSliderComponent.ts
 │   └── SearchComponent.ts
-├── fixtures/            # Configuraciones personalizadas de pruebas
+├── fixtures/            # Custom test configurations
 │   └── baseTest.ts
-├── pages/               # Page Object Model (Lógica de páginas)
-│   ├── BasePage.ts      # Abstracción común
+├── pages/               # Page Object Model (Page logic)
+│   ├── BasePage.ts      # Common abstraction
 │   ├── homePage.ts
 │   ├── LoginPage.ts
 │   └── RegisterPage.ts
-├── tests/               # Suite de Pruebas (.spec.ts)
-│   ├── api/             # Pruebas de API (en desarrollo)
-│   └── ui/              # Pruebas de Interfaz de Usuario
-│       ├── auth/        # Login y Registro
-│       └── home_page/   # Navegación y Búsqueda
-├── utils/               # Funciones de ayuda y constantes
+├── tests/               # Test Suite (.spec.ts)
+│   ├── api/             # API Tests (In progress)
+│   └── ui/              # UI Tests
+│       ├── auth/        # Login and Registration
+│       └── home_page/   # Navigation, Search, and Sliders
+├── utils/               # Helper functions and constants
 │   └── helpers.ts
-├── playwright.config.ts # Configuración global del framework
-└── .env                 # Secretos y credenciales (Ignorado en Git)
+├── playwright.config.ts # Global framework configuration
+└── .env                 # Secrets and credentials (Git ignored)
 ```
 
 ---
 
-## 📊 Reportes y Observabilidad
+## 📊 Reporting and Observability
 
-El proyecto está configurado para generar reportes ricos en información después de cada ejecución:
+The project is configured to generate data-rich reports after each execution:
 
-- **HTML Report**: Reporte interactivo detallado.
-- **Videos**: Grabación completa de la ejecución de cada prueba.
-- **Traces**: Análisis paso a paso de cada acción (útil para debugging).
-- **Screenshots**: Capturas automáticas en caso de fallo.
+- **HTML Report**: Detailed interactive report.
+- **Videos**: Full recording of each test execution.
+- **Traces**: Step-by-step analysis of every action (excellent for debugging).
+- **Screenshots**: Automatic captures on failure.
 
-Para ver los resultados, ejecuta: `npm run test:report`
-
----
-
-## 👤 Autor
-
-Desarrollado como proyecto de práctica profesional con **Playwright**.
+To view the results, run: `npm run test:report`
 
 ---
 
-## 📄 Licencia
+## 👤 Author
 
-Este proyecto está bajo la licencia [ISC](https://opensource.org/licenses/ISC).
+Developed as a professional practice project using **Playwright**.
+
+---
+
+## 📄 License
+
+This project is licensed under the [ISC](https://opensource.org/licenses/ISC) license.
