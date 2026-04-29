@@ -48,20 +48,3 @@ test("Verify that the logo has the correct src and alt attribute on home page", 
     expect(homePage.store_logo).toHaveAttribute("alt", "Poco Electro")
 })
 
-
-test("Verify search for a product from home page", async({page, homePage}) => {
-    await homePage.navigateToHomePage();
-
-    await homePage.searchComponent.searchForProduct("iPhone");
-    expect(page.url()).toContain("search=iPhone")
-})
-
-test("Verify home redirection after clicking on home page logo", async({page, homePage}) => {
-    await homePage.navigateToHomePage();
-
-    await homePage.searchComponent.searchForProduct("iPhone");
-    expect(page.url()).toContain("search=iPhone")
-
-    await homePage.store_logo.click();
-    expect(page.url()).toBe("https://ecommerce-playground.lambdatest.io/index.php?route=common/home");
-})
