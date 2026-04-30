@@ -103,6 +103,45 @@ import SearchComponent from "./components/SearchComponent";
    page.getByPlaceholder("Search For Products").filter({ visible: true })
    ```
 
+## Strict POM Rule — Zero Locators in Tests
+
+**All locators must be defined inside Page Object classes.** Test files (`.spec.ts`) must NEVER contain `.locator()`, `.getBy...()`, CSS selectors, or XPath.
+
+### What is FORBIDDEN in test files
+
+```typescript
+// WRONG — locators in tests
+const badge = mainNavigation.specialLink.locator('.badge')
+await expect(page).toHaveURL(/route=common\/home/)
+await expect(page).toHaveTitle("Your Store")
+await expect(mainNavigation.homeLink).toHaveAttribute("href", /route=common\/home/)
+await expect(mainNavigation.megaMenuLink).toHaveClass(/dropdown-toggle/)
+```
+
+### What is CORRECT
+
+```typescript
+// RIGHT — use Page Object properties and methods
+await expect(mainNavigation.specialBadge).toBeVisible()
+const url = await mainNavigation.getPageUrl()
+const title = await mainNavigation.getPageTitle()
+expect(url).toContain("route=common/home")
+expect(title).toBe("Your Store")
+
+const href = await mainNavigation.getHomeHref()
+expect(href).toContain("route=common/home")
+
+const isToggle = await mainNavigation.isMegaMenuToggle()
+expect(isToggle).toBe(true)
+```
+
+### Rules
+
+1. **Child elements**: If you need to verify a sub-element (e.g. a badge inside a nav link), create a dedicated `readonly` property in the Page Object (e.g. `this.specialBadge = this.specialLink.locator('.badge')`).
+2. **URL and Title checks**: Expose `getPageUrl()` and `getPageTitle()` methods on the Page Object or Component. Tests call these methods and assert on the returned strings.
+3. **Attribute checks**: Expose getter methods like `getHomeHref()` that return the attribute value, or boolean methods like `isMegaMenuToggle()` for class checks.
+4. **Visibility assertions**: It is acceptable to use `expect(pageObject.someProperty).toBeVisible()` as long as `someProperty` is a `readonly` Locator defined in the Page Object constructor.
+
 ## Error Handling
 
 - Use Playwright's built-in auto-waiting and assertions rather than manual `try/catch`

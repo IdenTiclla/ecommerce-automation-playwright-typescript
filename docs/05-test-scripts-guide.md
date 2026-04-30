@@ -12,10 +12,12 @@ tests/
     ├── auth/
     │   ├── login-page.spec.ts      # Login tests
     │   └── register-page.spec.ts   # Registration tests
-    └── home_page/
-        ├── home-page.spec.ts       # Home page tests
-        ├── search.spec.ts          # Search functionality tests
-        └── slider.spec.ts          # Slider component tests
+    ├── home_page/
+    │   ├── home-page.spec.ts       # Home page tests
+    │   ├── search.spec.ts          # Search functionality tests
+    │   └── slider.spec.ts          # Slider component tests
+    └── navigation/
+        └── main-navigation.spec.ts # Navigation bar tests
 ```
 
 ## Writing a New Test
@@ -73,13 +75,17 @@ The following page objects are available as test parameters via `baseTest.ts`:
 | `loginPage` | `LoginPage` | Login page object |
 | `registerPage` | `RegisterPage` | Registration page object |
 | `searchResultsPage` | `SearchResultsPage` | Search results page object |
+| `mainNavigation` | `MainNavigationComponent` | Horizontal navigation bar |
+| `shopByCategory` | `ShopByCategoryComponent` | Shop by Category sidebar/drawer |
 
 Usage:
 ```typescript
-test("My test", async ({ page, homePage, loginPage }) => {
-    // All three fixtures are automatically instantiated
+test("My test", async ({ homePage, mainNavigation }) => {
+    // Page object fixtures are automatically instantiated
 });
 ```
+
+> **Note**: Avoid using the raw `page` fixture for assertions. Use `getPageUrl()` / `getPageTitle()` methods from the page object instead.
 
 ## Using Helper Functions
 
@@ -120,15 +126,52 @@ await expect(locator).toHaveText("exact text");
 
 ### URL assertions
 ```typescript
-expect(page.url()).toBe("https://full-url.com/");
-await expect(page).toHaveURL(/regex-pattern/);
-await expect(page).toHaveURL("exact-url");
+// PREFERRED — via page object method
+const url = await mainNavigation.getPageUrl()
+expect(url).toContain("route=common/home")
+
+// AVOID — direct page usage
+await expect(page).toHaveURL(/regex-pattern/)
+```
+
+### Title assertions
+```typescript
+// PREFERRED — via page object method
+const title = await mainNavigation.getPageTitle()
+expect(title).toBe("Your Store")
+
+// AVOID — direct page usage
+await expect(page).toHaveTitle("Your Store")
 ```
 
 ### Attribute assertions
 ```typescript
-await expect(locator).toHaveAttribute("src", "https://...");
-await expect(locator).toHaveAttribute("aria-expanded", "true");
+// PREFERRED — via page object getter method
+const href = await mainNavigation.getHomeHref()
+expect(href).toContain("route=common/home")
+
+// AVOID — direct locator attribute check in test
+await expect(mainNavigation.homeLink).toHaveAttribute("href", /route=common/)
+```
+
+### Badge / child element assertions
+```typescript
+// PREFERRED — dedicated property defined in page object
+await expect(mainNavigation.specialBadge).toBeVisible()
+await expect(mainNavigation.specialBadge).toHaveText("Hot")
+
+// WRONG — locator in test
+const badge = mainNavigation.specialLink.locator('.badge')
+```
+
+### CSS class assertions
+```typescript
+// PREFERRED — boolean method in page object
+const isToggle = await mainNavigation.isMegaMenuToggle()
+expect(isToggle).toBe(true)
+
+// AVOID — direct class check in test
+await expect(mainNavigation.megaMenuLink).toHaveClass(/dropdown-toggle/)
 ```
 
 ### Value assertions
@@ -256,3 +299,7 @@ await loginPage.fillPassword(process.env.VALID_PASSWORD);
 8. **Test both positive and negative scenarios**: Valid inputs AND invalid inputs
 9. **Assert on the result**: After an action, always assert the expected outcome
 10. **Keep tests independent**: Each test should be able to run alone without depending on another test's state
+11. **Zero locators in tests**: Never use `.locator()`, `.getBy...()`, CSS selectors, or XPath in test files — encapsulate them in Page Objects
+12. **No raw `page` assertions**: Use `getPageUrl()` / `getPageTitle()` methods from Page Objects instead of `page.toHaveURL()` / `page.toHaveTitle()`
+13. **Use dedicated properties for child elements**: If a badge, icon, or sub-element needs verification, define it as a property in the Page Object (e.g. `this.specialBadge`)
+14. **Use getter methods for attribute checks**: Call methods like `getHomeHref()` that return values, then assert on the returned data

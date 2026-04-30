@@ -3,12 +3,16 @@ import HomePage from "../pages/homePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage"
 import SearchResultsPage from "../pages/SearchResultsPage"
+import MainNavigationComponent from "../pages/components/MainNavigationComponent";
+import ShopByCategoryComponent from "../pages/components/ShopByCategoryComponent";
 
 type MyFixtures = {
     homePage: HomePage
     loginPage: LoginPage
     registerPage: RegisterPage
     searchResultsPage: SearchResultsPage
+    mainNavigation: MainNavigationComponent
+    shopByCategory: ShopByCategoryComponent
 }
 
 export const test = base.extend<MyFixtures>({
@@ -31,6 +35,16 @@ export const test = base.extend<MyFixtures>({
     searchResultsPage: async ({ page }, use) => {
         const searchResultsPage = new SearchResultsPage(page);
         await use(searchResultsPage);
+    },
+
+    mainNavigation: async ({ page }, use) => {
+        const mainNavigation = new MainNavigationComponent(page);
+        await use(mainNavigation);
+    },
+
+    shopByCategory: async ({ page }, use) => {
+        const shopByCategory = new ShopByCategoryComponent(page);
+        await use(shopByCategory);
     }
 
 });

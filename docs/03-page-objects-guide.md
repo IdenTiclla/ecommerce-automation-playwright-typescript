@@ -222,3 +222,7 @@ export default YourPage;
 5. **Hide the `page` reference**: Make `page` private unless child classes need it (use `protected` or `public` as needed)
 6. **Return values, not assertions**: Page methods should return data; let tests handle assertions
 7. **URL as a property**: Store the page URL as a class property for easy navigation
+8. **Zero locators in tests**: Never use `.locator()`, `.getBy...()`, CSS selectors, or XPath inside `.spec.ts` files. All selectors must live in Page Object classes
+9. **No raw `page` in tests**: Expose `getPageUrl()` and `getPageTitle()` methods so tests never call `page.toHaveURL()` or `page.toHaveTitle()` directly
+10. **Child elements as properties**: If a child element needs verification (e.g. a badge inside a link), create a dedicated property (e.g. `this.specialBadge`) rather than using `.locator()` in the test
+11. **Attribute and class checks as methods**: Expose methods like `getHomeHref()` or `isDropdownToggle()` instead of using `.toHaveAttribute()` or `.toHaveClass()` directly on exposed locators in tests
