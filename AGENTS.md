@@ -41,5 +41,6 @@ There is no lint, typecheck, or formatter configured. No build step — Playwrig
 
 - Only the **chromium** project is active in `playwright.config.ts`; firefox/safari/edge are commented out.
 - Viewport is set to 1920×1080, not the Playwright default.
-- Video recording is `on` for every test; traces are `on`; screenshots are `only-on-failure`. Test artifacts accumulate in `test-results/` and `playwright-report/`.
+- Parallel execution is enabled (`fullyParallel: true`) using multiple workers locally.
+- Video recording is set to `retain-on-failure`; traces are `on-first-retry`; screenshots are `only-on-failure`. Test artifacts accumulate in `test-results/` and `playwright-report/`.
 - No `tsconfig.json` exists — the project relies on Playwright's built-in TypeScript support.

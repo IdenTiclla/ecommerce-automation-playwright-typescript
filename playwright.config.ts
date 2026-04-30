@@ -11,6 +11,14 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
 export default defineConfig({
   testDir: './tests',
   testMatch: /.*\.spec\.ts/,
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
   // configuracion del reporter
   reporter: [
     ['html', { outputFolder: 'playwright-report' }]
@@ -22,8 +30,8 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
     baseURL: process.env.BASE_URL,
     screenshot: 'only-on-failure',
-    video: 'on',
-    trace: 'on'
+    video: 'retain-on-failure',
+    trace: 'on-first-retry'
   },
   projects: [
     {
