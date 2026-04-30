@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import SearchComponent from "../components/SearchComponent";
+import SearchComponent from "./components/SearchComponent";
 
 class LoginPage {
     private page: Page;

@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 import BasePage from "./BasePage";
-import SearchComponent from "../components/SearchComponent";
+import SearchComponent from "./components/SearchComponent";
 
 class SearchResultsPage extends BasePage {
     readonly searchComponent: SearchComponent;

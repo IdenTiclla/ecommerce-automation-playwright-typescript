@@ -1,7 +1,7 @@
 import { Page, Locator } from "@playwright/test";
 import BasePage from "./BasePage";
-import SearchComponent from "../components/SearchComponent";
-import MainSliderComponent from "../components/MainSliderComponent";
+import SearchComponent from "./components/SearchComponent";
+import MainSliderComponent from "./components/MainSliderComponent";
 
 
 class HomePage extends BasePage {
