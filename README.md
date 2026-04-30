@@ -81,26 +81,41 @@ The project includes several scripts configured in `package.json` for easy testi
 
 ```bash
 .
-├── components/          # Shared components across pages
-│   ├── MainSliderComponent.ts
-│   └── SearchComponent.ts
-├── fixtures/            # Custom test configurations
+├── docs/                # 📖 Detailed guides and standards
+├── fixtures/            # 🔌 Custom test configurations
 │   └── baseTest.ts
-├── pages/               # Page Object Model (Page logic)
+├── pages/               # 🏗️ Page Object Model (Page logic)
+│   ├── components/      # 🧩 Shared widgets (Search, Sliders)
 │   ├── BasePage.ts      # Common abstraction
 │   ├── homePage.ts
 │   ├── LoginPage.ts
-│   └── RegisterPage.ts
-├── tests/               # Test Suite (.spec.ts)
+│   ├── RegisterPage.ts
+│   └── SearchResultsPage.ts
+├── tests/               # 🧪 Test Suite (.spec.ts)
 │   ├── api/             # API Tests (In progress)
 │   └── ui/              # UI Tests
 │       ├── auth/        # Login and Registration
 │       └── home_page/   # Navigation, Search, and Sliders
-├── utils/               # Helper functions and constants
+├── utils/               # 🛠️ Helper functions and constants
 │   └── helpers.ts
 ├── playwright.config.ts # Global framework configuration
-└── .env                 # Secrets and credentials (Git ignored)
+└── .env                 # Secrets and credentials
 ```
+
+---
+
+## 📚 Documentation
+
+Detailed guides are available in the `docs/` folder to help you understand the architecture and standards:
+
+- [Project Overview](docs/01-project-overview.md)
+- [Coding Standards](docs/02-coding-standards.md)
+- [Page Objects Guide](docs/03-page-objects-guide.md)
+- [Components Guide](docs/04-components-guide.md)
+- [Test Scripts Guide](docs/05-test-scripts-guide.md)
+- [Fixtures Guide](docs/06-fixtures-guide.md)
+- [Utilities Guide](docs/07-utilities-guide.md)
+- [Configuration Guide](docs/08-configuration-guide.md)
 
 ---
 
