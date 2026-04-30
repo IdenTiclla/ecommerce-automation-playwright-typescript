@@ -28,6 +28,19 @@ npx playwright test -g "Login with valid credentials"
 
 There is no lint, typecheck, or formatter configured. No build step — Playwright runs `.ts` natively.
 
+## Documentation
+
+Detailed guides and standards are located in the `docs/` directory:
+
+- [01-project-overview.md](docs/01-project-overview.md): Project summary, tech stack, and high-level architecture.
+- [02-coding-standards.md](docs/02-coding-standards.md): Naming conventions, locator strategies, and general coding rules.
+- [03-page-objects-guide.md](docs/03-page-objects-guide.md): How to create and maintain Page Objects (POM).
+- [04-components-guide.md](docs/04-components-guide.md): Standards for shared UI components.
+- [05-test-scripts-guide.md](docs/05-test-scripts-guide.md): Structure and best practices for writing `.spec.ts` files.
+- [06-fixtures-guide.md](docs/06-fixtures-guide.md): Using and extending the custom fixture system (`baseTest.ts`).
+- [07-utilities-guide.md](docs/07-utilities-guide.md): Usage of helper functions and data generators.
+- [08-configuration-guide.md](docs/08-configuration-guide.md): Deep dive into `playwright.config.ts` and environment variables.
+
 ## Architecture
 
 - **Page Object Model (strict POM)**: all page classes live in `pages/` and extend `BasePage`. **Zero locators in test files** — `.locator()`, `.getBy...()`, CSS selectors, and XPath are forbidden inside `.spec.ts` files. All selectors must be encapsulated in the corresponding Page Object class as `readonly` properties or methods. If a child element needs verification (e.g. a badge inside a link), create a dedicated property (e.g. `this.specialBadge`) or a method in the Page Object.
