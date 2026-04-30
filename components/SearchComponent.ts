@@ -5,12 +5,12 @@ class SearchComponent {
     readonly search_button: Locator;
     readonly category_dropdown: Locator;
     readonly suggestions_list: Locator;
-   
+
     constructor(page: Page) {
-        this.search_input = page.getByPlaceholder("Search For Products").nth(0);
-        this.search_button = page.getByRole("button", { name: "search"}).first();
-        this.category_dropdown = page.locator(".search-input-group .dropdown-toggle").first();
-        this.suggestions_list = page.locator(".search-input-group .dropdown-menu.autocomplete").first();
+        this.search_input = page.getByPlaceholder("Search For Products").filter({ visible: true });
+        this.search_button = page.getByRole("button", { name: "search" }).filter({ visible: true });
+        this.category_dropdown = page.locator(".search-input-group .dropdown-toggle").filter({ visible: true });
+        this.suggestions_list = page.locator(".search-input-group .dropdown-menu.autocomplete").filter({ visible: true });
     }
 
 
