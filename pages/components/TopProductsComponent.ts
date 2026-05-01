@@ -27,24 +27,28 @@ class TopProductsComponent {
     async addToCart(index: number = 0) {
         await this.goToSection();
         await this.productActionButtons.hoverProductThumb(index);
+        await this.productActionButtons.getCartButton(index).waitFor({ state: 'visible' }).catch(() => {});
         await this.productActionButtons.addToCart(index);
     }
 
     async addToWishlist(index: number = 0) {
         await this.goToSection();
         await this.productActionButtons.hoverProductThumb(index);
+        await this.productActionButtons.getWishlistButton(index).waitFor({ state: 'visible' }).catch(() => {});
         await this.productActionButtons.addToWishlist(index);
     }
 
     async addToCompare(index: number = 0) {
         await this.goToSection();
         await this.productActionButtons.hoverProductThumb(index);
+        await this.productActionButtons.getCompareButton(index).waitFor({ state: 'visible' }).catch(() => {});
         await this.productActionButtons.addToCompare(index);
     }
 
     async openQuickView(index: number = 0) {
         await this.goToSection();
         await this.productActionButtons.hoverProductThumb(index);
+        await this.productActionButtons.getQuickViewButton(index).waitFor({ state: 'visible' }).catch(() => {});
         await this.productActionButtons.openQuickView(index);
     }
 

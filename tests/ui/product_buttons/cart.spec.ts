@@ -26,6 +26,8 @@ test.describe("Cart Button - Top Products", () => {
         await topProducts.addToCart(0);
         const appeared = await toast.waitForToast();
         expect(appeared).toBeTruthy();
+        const text = await toast.getToastText();
+        expect(text).toContain("Success: You have added iMac to your shopping cart!");
     });
 
     test("Clicking toast notification after cart does not error", async ({ topProducts, toast }) => {

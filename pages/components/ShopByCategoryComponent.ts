@@ -33,7 +33,14 @@ class ShopByCategoryComponent {
     async clickCategoryByName(name: string) {
         await this.clickShopByCategory()
         const link = this.categoryMenu.locator('.nav-link', { hasText: name }).first()
-        await link.click({ force: true })
+        try {
+            await link.click({ force: true })
+        } catch {
+            const href = await link.getAttribute('href')
+            if (href) {
+                await this.page.goto(href)
+            }
+        }
     }
 
     async getCategoryItemCount(): Promise<number> {

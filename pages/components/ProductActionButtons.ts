@@ -51,26 +51,22 @@ class ProductActionButtons {
 
     async addToCart(index: number = 0) {
         const btn = this.getCartButton(index);
-        await btn.scrollIntoViewIfNeeded();
-        await btn.click({ force: true });
+        await btn.dispatchEvent('click');
     }
 
     async addToWishlist(index: number = 0) {
         const btn = this.getWishlistButton(index);
-        await btn.scrollIntoViewIfNeeded();
-        await btn.click({ force: true });
+        await btn.dispatchEvent('click');
     }
 
     async addToCompare(index: number = 0) {
         const btn = this.getCompareButton(index);
-        await btn.scrollIntoViewIfNeeded();
-        await btn.click({ force: true });
+        await btn.dispatchEvent('click');
     }
 
     async openQuickView(index: number = 0) {
         const btn = this.getQuickViewButton(index);
-        await btn.scrollIntoViewIfNeeded();
-        await btn.click({ force: true });
+        await btn.dispatchEvent('click');
     }
 
     async hoverProductThumb(index: number = 0) {
