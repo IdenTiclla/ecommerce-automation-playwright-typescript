@@ -2,6 +2,8 @@ import { Page, Locator } from "@playwright/test";
 import BasePage from "./BasePage";
 import SearchComponent from "./components/SearchComponent";
 import MainSliderComponent from "./components/MainSliderComponent";
+import ProductActionButtons from "./components/ProductActionButtons";
+import HeaderActionsComponent from "./components/HeaderActionsComponent";
 
 
 class HomePage extends BasePage {
@@ -12,6 +14,8 @@ class HomePage extends BasePage {
     readonly store_logo: Locator;
     readonly searchComponent: SearchComponent;
     readonly mainSlider: MainSliderComponent;
+    readonly productActionButtons: ProductActionButtons;
+    readonly headerActions: HeaderActionsComponent;
 
     constructor(page: Page) {
         super(page);
@@ -19,6 +23,8 @@ class HomePage extends BasePage {
         // components
         this.searchComponent = new SearchComponent(page);
         this.mainSlider = new MainSliderComponent(page);
+        this.productActionButtons = new ProductActionButtons(page);
+        this.headerActions = new HeaderActionsComponent(page);
 
         // locators
         this.dummy_message = page.locator("p strong");
