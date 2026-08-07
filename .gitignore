@@ -21,3 +21,9 @@ node_modules/
 .gemini/
 .agents/
 .playwright-cli/
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

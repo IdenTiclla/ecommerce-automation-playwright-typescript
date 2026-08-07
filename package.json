@@ -13,11 +13,23 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@playwright/test": "^1.54.2"
-  },
+  "description": "[![Playwright](https://img.shields.io/badge/Playwright-1.54.2-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)](https://github.com/)",
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2",
     "dotenv": "^17.4.2"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IdenTiclla/ecommerce-automation-playwright-typescript.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/IdenTiclla/ecommerce-automation-playwright-typescript/issues"
+  },
+  "homepage": "https://github.com/IdenTiclla/ecommerce-automation-playwright-typescript#readme"
 }
