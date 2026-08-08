@@ -11,6 +11,10 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
+
     env:
       BASE_URL: ${{ secrets.BASE_URL }}
       VALID_EMAIL: ${{ secrets.VALID_EMAIL }}
@@ -34,6 +38,14 @@ jobs:
 
       - name: Run all Playwright tests
         run: npm test
+
+      - name: Publish test results
+        if: ${{ !cancelled() }}
+        uses: dorny/test-reporter@v3
+        with:
+          name: Playwright Tests
+          path: test-results/results.xml
+          reporter: java-junit
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
