@@ -18,7 +18,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 5 : undefined,
   // configuracion del reporter
   reporter: [
     ['html', { outputFolder: 'playwright-report' }],
@@ -31,15 +31,8 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
     baseURL: process.env.BASE_URL,
     screenshot: 'only-on-failure',
-    video: {
-      mode: 'on',
-      show: {
-        actions: {
-          position: 'top'
-        }
-      }
-    },
-    trace: 'on'
+    video: 'retain-on-failure',
+    trace: 'retain-on-failure'
   },
   projects: [
     {
