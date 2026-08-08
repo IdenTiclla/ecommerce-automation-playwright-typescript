@@ -30,8 +30,15 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
     baseURL: process.env.BASE_URL,
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
-    trace: 'on-first-retry'
+    video: {
+      mode: 'on',
+      show: {
+        actions: {
+          position: 'top'
+        }
+      }
+    },
+    trace: 'on'
   },
   projects: [
     {

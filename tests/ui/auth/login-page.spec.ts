@@ -3,14 +3,25 @@ import { test, expect } from "../../../fixtures/baseTest"
 
 test("Login with valid credentials", async ({ page, loginPage, homePage}) => {
 
-  await homePage.navigateToHomePage();
-  await homePage.clickOnMyAccount();
-  await loginPage.fillEmail(process.env.VALID_EMAIL);
-  await loginPage.fillPassword(process.env.VALID_PASSWORD);
-  await loginPage.clickOnLoginButton();
+  await test.step("Go to Login page", async () => {
+    await homePage.navigateToHomePage();
+    await homePage.clickOnMyAccount();
+  })
+
+  await test.step("Enter user Email", async () => {
+    await loginPage.fillEmail(process.env.VALID_EMAIL);
+  })
+
+  await test.step("Enter user Password", async () => {
+    await loginPage.fillPassword(process.env.VALID_PASSWORD);
+  })
+
+  await test.step("Click on Login button", async () => {
+    await loginPage.clickOnLoginButton();
+  })
+  
 
   await expect(page.getByRole('heading', { name: 'My Account' })).toBeVisible();
-
 })
 
 test("Login with invalid credentials", async ({ page, homePage, loginPage }) => {
