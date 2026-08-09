@@ -123,7 +123,7 @@ npm run allure:open
 
 Allure 3 runs with Node.js, so generating or opening the report locally does not require Java.
 
-The GitHub Actions workflow generates the Allure report after every non-cancelled run and uploads `allure-report/` as an artifact, including failed runs. Download the artifact from the workflow run and open its `index.html`, or run `allure open <downloaded-artifact-directory>`.
+The GitHub Actions workflow generates the Allure report after every non-cancelled run and uploads `allure-report/` as an artifact, including failed runs. All artifacts are retained for seven days. On pushes to `master`, it also deploys the latest Allure report to GitHub Pages, replacing the previous publication. Allure history is intentionally disabled for this practice project. Download the artifact from the workflow run and open its `index.html`, or run `allure open <downloaded-artifact-directory>`.
 
 ## Modifying the Configuration
 

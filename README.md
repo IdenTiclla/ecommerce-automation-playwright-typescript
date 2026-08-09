@@ -138,7 +138,8 @@ The Playwright HTML report can be opened with `npm run test:report`.
 Allure works both locally and in CI:
 
 - Locally, run `npm test`, then `npm run allure:generate` and `npm run allure:open`. `npm test` clears previous generated Allure data first, so each report reflects only the current execution. If tests fail, run the generate command separately so the partial results are still reported. Allure 3 runs with Node.js, so Java is not required.
-- In GitHub Actions, the workflow generates Allure even when tests fail and uploads `allure-report` as a downloadable artifact.
+- In GitHub Actions, the workflow generates Allure even when tests fail and uploads `allure-report` as a downloadable artifact. Artifacts are retained for seven days.
+- On pushes to `master`, the latest Allure report is published to GitHub Pages and replaces the previous one. Allure history is intentionally not retained in this practice project.
 
 ---
 
