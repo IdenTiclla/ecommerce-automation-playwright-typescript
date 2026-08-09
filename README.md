@@ -74,6 +74,10 @@ The project includes several scripts configured in `package.json` for easy testi
 | `npm run test:debug` | Starts the Playwright debugger |
 | `npm run test:chrome` | Runs tests specifically in Chromium |
 | `npm run test:report` | Shows the last generated HTML report |
+| `npm run test:allure` | Runs tests and generates the Allure report when they pass |
+| `npm run allure:clean` | Removes generated Allure results and report |
+| `npm run allure:generate` | Generates `allure-report/` from the latest `allure-results/` |
+| `npm run allure:open` | Opens the generated Allure report locally |
 
 ---
 
@@ -124,11 +128,17 @@ Detailed guides are available in the `docs/` folder to help you understand the a
 The project is configured to generate data-rich reports after each execution:
 
 - **HTML Report**: Detailed interactive report.
+- **Allure Report**: Rich report with suites, execution history and attached failure artifacts.
 - **Videos**: Full recording of each test execution.
 - **Traces**: Step-by-step analysis of every action (excellent for debugging).
 - **Screenshots**: Automatic captures on failure.
 
-To view the results, run: `npm run test:report`
+The Playwright HTML report can be opened with `npm run test:report`.
+
+Allure works both locally and in CI:
+
+- Locally, run `npm test`, then `npm run allure:generate` and `npm run allure:open`. `npm test` clears previous generated Allure data first, so each report reflects only the current execution. If tests fail, run the generate command separately so the partial results are still reported. Allure 3 runs with Node.js, so Java is not required.
+- In GitHub Actions, the workflow generates Allure even when tests fail and uploads `allure-report` as a downloadable artifact.
 
 ---
 

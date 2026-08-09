@@ -7,6 +7,8 @@ coverage/
 # Test results
 test-results/
 playwright-report/
+allure-results/
+allure-report/
 
 # Node modules
 node_modules/

@@ -11,7 +11,9 @@ export default defineConfig({
     testDir: './tests',                    // Root test directory
     testMatch: /.*\.spec\.ts/,             // Test file pattern
     reporter: [
-        ['html', { outputFolder: 'playwright-report' }]
+        ['html', { outputFolder: 'playwright-report' }],
+        ['junit', { outputFile: 'test-results/results.xml' }],
+        ['allure-playwright', { outputFolder: 'allure-results' }]
     ],
     use: {
         headless: true,                    // Run without visible browser
@@ -37,7 +39,7 @@ export default defineConfig({
 | :--- | :--- | :--- |
 | `testDir` | `./tests` | Where test files are located |
 | `testMatch` | `/.*\.spec\.ts/` | Only `.spec.ts` files are treated as tests |
-| `reporter` | `html` | Generates HTML report in `playwright-report/` |
+| `reporter` | `html`, `junit`, `allure-playwright` | Generates Playwright HTML, JUnit and Allure results |
 | `headless` | `true` | Browser runs without UI (faster) |
 | `viewport` | `1920x1080` | Full HD screen resolution |
 | `ignoreHTTPSErrors` | `true` | Ignores SSL issues |
@@ -93,6 +95,10 @@ BASE_URL=https://ecommerce-playground.lambdatest.io/
 | `npm run test:debug` | `npx playwright test --debug` | Step-through debugger |
 | `npm run test:chrome` | `npx playwright test --project=chromium` | Run only Chromium tests |
 | `npm run test:report` | `npx playwright show-report` | Open last HTML report |
+| `npm run test:allure` | `npm test && npm run allure:generate` | Run tests and generate Allure on success |
+| `npm run allure:clean` | `rm -rf allure-results allure-report` | Remove previous generated Allure data |
+| `npm run allure:generate` | `allure generate allure-results --output allure-report` | Build Allure HTML from results |
+| `npm run allure:open` | `allure open allure-report` | Open the generated Allure report locally |
 
 ## Output Artifacts
 
@@ -100,6 +106,24 @@ BASE_URL=https://ecommerce-playground.lambdatest.io/
 | :--- | :--- | :--- |
 | `playwright-report/` | HTML test reports | Ignored |
 | `test-results/` | Screenshots, videos, traces | Ignored |
+| `allure-results/` | Raw Allure results produced by each test run | Ignored |
+| `allure-report/` | Generated Allure HTML report | Ignored |
+
+## Allure reports
+
+Allure runs alongside the existing HTML and JUnit reporters, so it works on a developer machine and in CI. Run tests first, then generate and open the report:
+
+```bash
+npm test
+npm run allure:generate
+npm run allure:open
+```
+
+`npm test` runs `allure:clean` beforehand, ensuring that the report contains only the current execution.
+
+Allure 3 runs with Node.js, so generating or opening the report locally does not require Java.
+
+The GitHub Actions workflow generates the Allure report after every non-cancelled run and uploads `allure-report/` as an artifact, including failed runs. Download the artifact from the workflow run and open its `index.html`, or run `allure open <downloaded-artifact-directory>`.
 
 ## Modifying the Configuration
 
